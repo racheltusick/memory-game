@@ -1,0 +1,116 @@
+<!DOCTYPE> 
+<html lang = "en"> 
+<title>Let's Play the <b>MEMORY GAME</b>!</title>
+<head> 
+    <style> 
+        div
+        {
+            display: inline-block; 
+        }
+        .card
+        {
+            margin: 10px; 
+            height: 100px; 
+            width: 60px;
+        }     
+        .cardBack
+        {     
+            background-color: rgb(41, 125, 134);          
+        }
+        .black 
+        {
+            background-color: black; 
+        }
+        .purple
+        {
+            background-color: rgb(173, 108, 173); 
+        }
+        .green
+        {
+            background-color: rgb(31, 99, 31); 
+        }
+        .pink
+        {
+            background-color: rgb(240, 195, 203); 
+        }
+        .white
+        {
+            background-color: white; 
+        }
+
+    </style>
+
+    <script>
+        colorArray = ["black", "purple", "green", "pink", "green", "black", "pink", "purple"];
+        flippedColors = []; //stores the colors of flipped cards
+        flippedCards = []; //stores the ID of flipped cards 
+        
+        
+        flipCard = (index) => 
+        {
+             color = colorArray[index]; 
+             document.getElementById(index).innerHTML = `<div class = "card ${color}" id = ${index}></div>`
+             flippedColors.push(color); 
+             flippedCards.push(index); 
+             counter++; 
+        }
+
+        counter = 0; 
+        twoClickMax = (index) => 
+        {
+            if (counter < 2)
+            {
+                flipCard(index); 
+            }
+            
+            else 
+            {
+                checkMatch(); 
+                flipCard(index); 
+            }
+        }
+
+        checkMatch = (index) => 
+        { 
+            if (flippedColors[0] == flippedColors[1])
+            {
+                yesMatch(index);
+            }
+            else 
+            {
+                BacktoCardBack(); 
+            }
+            flippedColors = [];
+            flippedCards = [];  
+            counter = 0; 
+        }
+
+        BacktoCardBack = (index) => 
+        {
+            document.getElementById(flippedCards[0]).innerHTML = `<div class = "card cardBack" onClick = "twoClickMax(${flippedCards[0]})">`
+
+            document.getElementById(flippedCards[1]).innerHTML = `<div class = "card cardBack" onClick = "twoClickMax(${flippedCards[1]})">`
+        }
+
+        yesMatch = () => 
+        {
+            document.getElementById(flippedCards[0]).innerHTML = `<div class = "card white"> </div>`;
+            
+            document.getElementById(flippedCards[1]).innerHTML = `<div class = "card white"> </div>` 
+        }
+    </script>
+    </head>
+<body> 
+    <header>Let's Play the <b>MEMORY GAME</b>!!</header>
+    <div id = 0> <div class = "card cardBack" onClick = "twoClickMax(0)"></div> </div>
+    <div id = 1> <div class = "card cardBack" onClick = "twoClickMax(1)"></div> </div>
+    <div id = 2> <div class = "card cardBack" onClick = "twoClickMax(2)"></div> </div>
+    <div id = 3> <div class = "card cardBack" onClick = "twoClickMax(3)"></div> </div>
+    <br> 
+    <div id = 4> <div class = "card cardBack" onClick = "twoClickMax(4)"></div> </div>
+    <div id = 5> <div class = "card cardBack" onClick = "twoClickMax(5)"></div> </div>
+    <div id = 6> <div class = "card cardBack" onClick = "twoClickMax(6)"></div> </div>
+    <div id = 7> <div class = "card cardBack" onClick = "twoClickMax(7)"></div> </div>
+    </div>
+</body>
+</html>
